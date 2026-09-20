@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ certification.name }} | MUHAMMED ADGOLIGN</title>
+
+    <style>
+        :root {
+            --bg: #08090c;
+            --surface: #11151b;
+            --text: #f4f6f8;
+            --text-soft: #aeb4bf;
+            --text-muted: #6f7783;
+            --accent: #d7ff4f;
+            --border: rgba(255,255,255,.10);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        .page {
+            width: min(1200px, calc(100% - 40px));
+            margin: 0 auto;
+            padding: 42px 0 60px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .brand {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            font-size: 13px;
+        }
+
+        .back-link {
+            color: var(--text-soft);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color .2s ease, transform .2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+            transform: translateX(-3px);
+        }
+
+        .header {
+            padding: 28px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .label {
+            margin-bottom: 12px;
+            color: #b5122b;
+            font-family: monospace;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(30px, 5vw, 56px);
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            margin: 14px 0 0;
+            color: var(--text-soft);
+            font-size: 14px;
+        }
+
+        .certificate-list {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            margin-top: 30px;
+        }
+
+        .certificate-card {
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--surface);
+        }
+
+        .certificate-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 4px 4px 16px;
+        }
+
+        .certificate-card-number {
+            color: #b5122b;
+            font-family: monospace;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .certificate-card-title {
+            margin: 4px 0 0;
+            color: var(--text);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .certificate-frame {
+            width: 100%;
+            height: min(78vh, 900px);
+            min-height: 600px;
+            border: 0;
+            background: #fff;
+            display: block;
+        }
+
+        .empty {
+            padding: 40px;
+            border: 1px dashed var(--border);
+            border-radius: 16px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .footer-note {
+            margin-top: 24px;
+            color: var(--text-muted);
+            font-family: monospace;
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        @media (max-width: 650px) {
+            .page {
+                width: min(100% - 24px, 1200px);
+                padding-top: 24px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .certificate-card {
+                padding: 8px;
+                border-radius: 12px;
+            }
+
+            .certificate-card-header {
+                padding: 10px 8px 14px;
+            }
+
+            .certificate-frame {
+                min-height: 70vh;
+            }
+
+            h1 {
+                letter-spacing: -1px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <div class="topbar">
+            <a class="brand" href="/">MUHAMMED ADGOLIGN</a>
+            <a class="back-link" href="/#certificates">&#8592; Back to Certificates</a>
+        </div>
+
+        <header class="header">
+            <div class="label">Certificate Collection</div>
+            <h1>{{ certification.name }}</h1>
+            <p class="subtitle">
+                {{ certification.certificates.count }}
+                certificate{{ certification.certificates.count|pluralize }}
+            </p>
+        </header>
+
+        <section class="certificate-list">
+            {% for certificate in certification.certificates.all %}
+                <article class="certificate-card">
+                    <div class="certificate-card-header">
+                        <div>
+                            <div class="certificate-card-number">
+                                CERTIFICATE {{ forloop.counter|stringformat:"02d" }}
+                            </div>
+
+                            {% if certificate.title %}
+                                <h2 class="certificate-card-title">
+                                    {{ certificate.title }}
+                                </h2>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <iframe
+                        class="certificate-frame"
+                        src="{% url 'certificate_file_view' certificate.id %}"
+                        title="{{ certification.name }} certificate {{ forloop.counter }}">
+                    </iframe>
+                </article>
+            {% empty %}
+                <div class="empty">
+                    No certificate files are currently available.
+                </div>
+            {% endfor %}
+        </section>
+
+        <p class="footer-note">
+            VIEW-ONLY CERTIFICATE COLLECTION
+        </p>
+    </main>
+<script>
+    document.addEventListener("contextmenu", function (event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("keydown", function (event) {
+        const key = event.key.toLowerCase();
+
+        if (
+            (event.ctrlKey || event.metaKey) &&
+            ["s", "p", "u", "c"].includes(key)
+        ) {
+            event.preventDefault();
+        }
+
+        if (event.key === "PrintScreen") {
+            event.preventDefault();
+        }
+    });
+
+    document.addEventListener("dragstart", function (event) {
+        event.preventDefault();
+    });
+
+    document.addEventListener("selectstart", function (event) {
+        event.preventDefault();
+    });
+</script>
+</body>
+</html>

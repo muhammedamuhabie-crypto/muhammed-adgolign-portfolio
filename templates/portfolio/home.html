@@ -1,0 +1,740 @@
+{% load static %}
+{% load portfolio_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if profile %}<meta name="description" content="{{ profile.name }} - {{ profile.role }}. {{ profile.description }}">{% else %}<meta name="description" content="MUHAMMED ADGOLIGN - Nuclear Engineering Student, Software Developer & Researcher. Passionate about software development, engineering research, and building practical technical projects.">{% endif %}
+    <meta name="author" content="MUHAMMED ADGOLIGN">
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+
+    <meta name="theme-color" content="#07090b">    {% if profile %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ profile.name }} | {{ profile.role }}">
+    <meta property="og:description" content="{{ profile.description }}">
+    {% if profile.image %}
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ profile.image.url }}">
+    <meta property="og:image:alt" content="{{ profile.name }} - {{ profile.role }}">
+    {% endif %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ profile.name }} | {{ profile.role }}">
+    <meta name="twitter:description" content="{{ profile.description }}">
+    {% if profile.image %}
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ profile.image.url }}">
+    <meta name="twitter:image:alt" content="{{ profile.name }}">
+    {% endif %}
+    {% endif %}
+
+    <title>MUHAMMED ADGOLIGN | Nuclear Engineering Student, Software Developer & Researcher</title>    {% if profile %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "{{ profile.name|escapejs }}",
+        "jobTitle": "{{ profile.role|escapejs }}",
+        "description": "{{ profile.description|escapejs }}",
+        "url": "{{ request.scheme }}://{{ request.get_host }}{{ request.path }}"{% if profile.image %},
+        "image": "{{ request.scheme }}://{{ request.get_host }}{{ profile.image.url }}"{% endif %},
+        "knowsAbout": [
+            "Nuclear Engineering",
+            "Software Development",
+            "Scientific Research",
+            "Engineering Projects"
+        ]
+    }
+    </script>
+    {% endif %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="site-shell">
+
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <div class="grid-overlay"></div>
+
+    <header class="navbar">
+        <a href="#home" class="brand">
+            <span class="brand-box">MA</span>
+            <span class="brand-text">
+                <strong>MUHAMMED</strong>
+                <small>ADGOLIGN</small>
+            </span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Main navigation">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#research" class="nav-link">Research</a>
+              <a href="#skills" class="nav-link">Skills</a>
+            <a href="#certificates" class="nav-link">Certificates</a>
+              <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <a href="#contact" class="nav-cta">
+            Let's Talk
+            <span>&#8599;</span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <main>
+
+        <section class="hero section" id="home">
+            <div class="hero-content reveal">
+                <div class="eyebrow">
+                    <span class="pulse-dot"></span>
+                    AVAILABLE FOR OPPORTUNITIES
+                </div>
+
+                <p class="hero-kicker">
+                    NUCLEAR ENGINEERING STUDENT
+                    <span>/</span>
+                    SOFTWARE DEVELOPER
+                    <span>/</span>
+                    RESEARCHER
+                </p>
+
+                <h1>
+                    MUHAMMED
+                    <span>ADGOLIGN</span>
+                </h1>
+
+                <div class="hero-bottom">
+                    <p class="hero-description">
+                        I build practical technology solutions, explore
+                        meaningful research, and turn ideas into useful
+                        real-world projects.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#projects" class="button button-primary">
+                            Explore my work
+                            <span>&#8599;</span>
+                        </a>
+
+                        <a href="#about" class="button button-secondary">
+                            About me
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual reveal reveal-delay">
+                <div class="orbit orbit-a"></div>
+                <div class="orbit orbit-b"></div>
+
+                <div class="identity-card">
+                    <div class="card-top">
+                        <span>PORTFOLIO / 2026</span>
+                        <span>01</span>
+                    </div>
+
+                    <div class="card-center">
+                        <span class="ma-large">MA</span>
+                    </div>
+
+                    <div class="card-bottom">
+                        <div>
+                            <small>FOCUS</small>
+                            <strong>ENGINEERING / RESEARCH</strong>
+                        </div>
+                        <div>
+                            <small>STATUS</small>
+                            <strong>NUCLEAR ENGINEERING</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="floating-tag tag-one">PYTHON</div>
+                <div class="floating-tag tag-two">RESEARCH</div>
+                <div class="floating-tag tag-three">BUILD</div>
+            </div>
+
+            <div class="scroll-indicator">
+                <span></span>
+                SCROLL TO EXPLORE
+            </div>
+        </section>
+
+        <section class="intro section" id="introduction">
+            <div class="section-label reveal">
+                <span>01</span>
+                INTRODUCTION
+            </div>
+
+            <div class="intro-layout">
+                <h2 class="reveal">
+                    A student who believes
+                    <em>learning is best done by building.</em>
+                </h2>
+
+                <div class="intro-copy reveal">
+                    <p>
+                        My work brings together nuclear engineering, software
+                        development, research, and a curiosity for how
+                        technical ideas can become practical solutions.
+                    </p>
+                    <p>
+                        I learn best by building, testing, and improving —
+                        turning concepts from the classroom into projects
+                        that help me understand how things work.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about section" id="about">
+            <div class="section-label reveal">
+                <span>02</span>
+                ABOUT ME
+            </div>
+
+            <div class="about-layout">
+                <div class="about-heading reveal">
+                    <h2>
+                        Curious mind.
+                        <em>Practical builder.</em>
+                    </h2>
+
+                    <div class="about-number">02</div>
+                </div>
+
+                <div class="about-content reveal">
+                    <p class="large-copy">
+                        I am a Nuclear Engineering student who enjoys working
+                        at the intersection of <strong>engineering, software,
+                        scientific research, and practical problem solving.</strong>
+                    </p>
+
+                    <p>
+                        I like turning what I learn into something tangible —
+                        from software systems and engineering projects to
+                        research ideas. My goal is to keep building practical
+                        skills, asking better questions, and connecting
+                        technical knowledge with problems that matter.
+                    </p>
+
+                    <div class="about-points">
+                        <div class="about-point">
+                            <span>01</span>
+                            <div>
+                                <strong>Student</strong>
+                                <small>University education</small>
+                            </div>
+                        </div>
+
+                        <div class="about-point">
+                            <span>02</span>
+                            <div>
+                                <strong>Developer</strong>
+                                <small>Web & software projects</small>
+                            </div>
+                        </div>
+
+                        <div class="about-point">
+                            <span>03</span>
+                            <div>
+                                <strong>Researcher</strong>
+                                <small>Exploring technical ideas</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects section" id="projects">
+    <div class="section-label reveal">
+        <span>03</span>
+        SELECTED WORK
+    </div>
+
+    <div class="section-heading reveal">
+        <h2>Things I've <em>built.</em></h2>
+        <span class="heading-index">03</span>
+    </div>
+
+    {% for project in projects %}
+    {% if project.published %}
+
+    <article class="project-feature{% if forloop.counter|divisibleby:2 %} project-feature-alt{% endif %} reveal">
+
+        <div class="project-info">
+            <div class="project-meta">
+                <span>{{ forloop.counter|stringformat:"02d" }}</span>
+                <span>{{ project.category|default:"TECHNICAL PROJECT" }}</span>
+            </div>
+
+            <h3>
+                {{ project.title }}
+                {% if project.subtitle %}
+                    <em>{{ project.subtitle }}</em>
+                {% endif %}
+            </h3>
+
+            <p>
+                {{ project.description }}
+            </p>
+
+            {% if project.technologies %}
+            <div class="tech-list">
+                {% for technology in project.technologies|split_tags %}
+                    <span>{{ technology }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if project.live_url %}
+                <a href="{{ project.live_url }}" class="project-link" target="_blank" rel="noopener noreferrer">
+                    View live project
+                    <span>&#8599;</span>
+                </a>
+            {% elif project.github_url %}
+                <a href="{{ project.github_url }}" class="project-link" target="_blank" rel="noopener noreferrer">
+                    View source
+                    <span>&#8599;</span>
+                </a>
+            {% elif project.research_url %}
+                <a href="{{ project.research_url }}" class="project-link" target="_blank" rel="noopener noreferrer">
+                    View research
+                    <span>&#8599;</span>
+                </a>
+            {% else %}
+                <a href="#contact" class="project-link">
+                    Discuss this project
+                    <span>&#8599;</span>
+                </a>
+            {% endif %}
+        </div>
+
+        {% if project.image %}
+
+        <div class="project-visual">
+            <div class="project-image">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}">
+            </div>
+        </div>
+
+        {% elif project.visual_type == "dashboard" %}
+
+        <div class="project-preview">
+            <div class="browser-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+                <label>school-management / dashboard</label>
+            </div>
+
+            <div class="dashboard-preview">
+                <aside>
+                    <div class="mini-logo">AR</div>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </aside>
+
+                <div class="dashboard-main">
+                    <div class="dashboard-title">
+                        <span>Dashboard</span>
+                        <b>2026</b>
+                    </div>
+
+                    <div class="dashboard-stats">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                    <div class="dashboard-chart"></div>
+
+                    <div class="dashboard-row">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-visual">
+            <div class="school-dashboard">
+                <div class="dashboard-top">
+                    <span>ADDIS RAY</span>
+                    <span>ADMIN DASHBOARD</span>
+                </div>
+
+                <div class="dashboard-title">
+                    <span>School Management</span>
+                    <small>2026 ACADEMIC YEAR</small>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <strong>1,248</strong>
+                        <small>STUDENTS</small>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <strong>84</strong>
+                        <small>TEACHERS</small>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <strong>96%</strong>
+                        <small>ATTENDANCE</small>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <strong>12</strong>
+                        <small>REPORTS</small>
+                    </div>
+                </div>
+
+                <div class="dashboard-panel">
+                    <div>
+                        <span>ACADEMIC PERFORMANCE</span>
+                        <strong>Student Records &amp; Performance</strong>
+                    </div>
+
+                    <div class="dashboard-bars">
+                        <i style="height: 42%;"></i>
+                        <i style="height: 68%;"></i>
+                        <i style="height: 54%;"></i>
+                        <i style="height: 82%;"></i>
+                        <i style="height: 72%;"></i>
+                        <i style="height: 91%;"></i>
+                    </div>
+                </div>
+
+                <a class="dashboard-live-link" href="https://addis-ray-school.onrender.com" target="_blank" rel="noopener noreferrer">VIEW LIVE SYSTEM &#8599;</a>
+
+                <div class="dashboard-footer">
+                    <span>STUDENTS</span>
+                    <span>ATTENDANCE</span>
+                    <span>GRADES</span>
+                    <span>RANKING</span>
+                </div>
+            </div>
+        </div>
+
+        {% elif project.visual_type == "optimization" %}
+
+        <div class="project-visual">
+            <div class="research-visual">
+                <div class="formula formula-one">MIN Z = C&#183;X</div>
+                <div class="formula formula-two">A X = b</div>
+                <div class="formula formula-three">DATA &#8594; MODEL &#8594; SOLUTION</div>
+                <div class="formula-ring"></div>
+            </div>
+        </div>
+
+        {% elif project.visual_type == "stirling" %}
+
+        <div class="project-visual">
+            <div class="research-visual">
+                <span class="formula">SOLAR &#8594; HEAT</span>
+                <span class="formula">HEAT &#8594; MOTION</span>
+                <span class="formula">ENERGY &#8594; WORK</span>
+                <small>STIRLING ENGINE / ENERGY CONVERSION</small>
+            </div>
+        </div>
+
+        {% elif project.visual_type == "soil" %}
+
+        <div class="project-visual">
+            <div class="research-visual">
+                <span class="formula">UREA</span>
+                <span class="formula">COMPOST</span>
+                <span class="formula">CONTROL</span>
+                <small>COMPARATIVE SOIL ACIDITY EXPERIMENT</small>
+            </div>
+        </div>
+
+        {% elif project.visual_type == "astrobiology" %}
+
+        <div class="project-visual">
+            <div class="research-visual">
+                <span class="formula">WATER &amp; ENERGY</span>
+                <span class="formula">PLANET &amp; HABITABILITY</span>
+                <span class="formula">SEARCH &amp; EVIDENCE</span>
+                <small>ASTROBIOLOGY / LIFE BEYOND EARTH</small>
+            </div>
+        </div>
+
+        {% else %}
+
+        <div class="project-visual">
+            <div class="research-visual">
+                <span class="formula">PROJECT / RESEARCH</span>
+                <span class="formula">{{ project.category|default:"TECHNICAL PROJECT" }}</span>
+                <span class="formula">IDEA &#8594; BUILD &#8594; RESULT</span>
+                <small>MUHAMMED ADGOLIGN / PROJECT</small>
+            </div>
+        </div>
+
+        {% endif %}
+
+    </article>
+
+    {% endif %}
+    {% endfor %}
+</section>
+
+<section class="research section" id="research">
+            <div class="section-label reveal">
+                <span>04</span>
+                RESEARCH
+            </div>
+
+            <div class="section-heading reveal">
+                <h2>
+                    Exploring questions.
+                    <em>Creating knowledge.</em>
+                </h2>
+                <span class="heading-index">04</span>
+            </div>
+
+            <div class="research-grid">
+                <div class="research-intro reveal">
+                    <p>
+                        Research is an important part of my academic journey.
+                        I am interested in understanding complex problems,
+                        testing ideas, and connecting engineering knowledge
+                        with practical solutions.
+                    </p>
+
+                    <div class="research-mark">&#8599;</div>
+                </div>
+
+                <div class="research-list reveal">
+                    <div class="research-item">
+                        <span>01</span>
+                        <div>
+                            <h3>Engineering Optimization & Decision Making</h3>
+                            <p>
+                                Mathematical approaches to resource allocation,
+                                cost minimization, and constrained engineering problems.
+                            </p>
+                        </div>
+                        <b>&#8599;</b>
+                    </div>
+
+                    <div class="research-item">
+                        <span>02</span>
+                        <div>
+                            <h3>Nuclear Engineering & Emerging Technologies</h3>
+                            <p>
+                                Exploring how nuclear engineering connects with
+                                emerging technologies and practical applications.
+                            </p>
+                        </div>
+                        <b>&#8599;</b>
+                    </div>
+
+                    <div class="research-item">
+                        <span>03</span>
+                        <div>
+                            <h3>Scientific Computing & Software Systems</h3>
+                            <p>
+                                Connecting mathematical reasoning, software, experimentation,
+                                and engineering problems.
+                            </p>
+                        </div>
+                        <b>&#8599;</b>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills section" id="skills">
+            <div class="section-label reveal">
+                <span>05</span>
+                SKILLS
+            </div>
+
+            <div class="section-heading reveal">
+                <h2>Tools for <em>building.</em></h2>
+                <span class="heading-index">05</span>
+            </div>
+
+            <div class="skills-grid">
+
+                <div class="skill-card reveal">
+                    <span class="skill-number">01</span>
+                    <h3>Development</h3>
+                    <p>Python &#183; Django &#183; JavaScript &#183; HTML &#183; CSS</p>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-number">02</span>
+                    <h3>Backend</h3>
+                    <p>REST APIs &#183; JWT &#183; PostgreSQL &#183; Database Design</p>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-number">03</span>
+                    <h3>Research</h3>
+                    <p>Mathematical Modeling &#183; Optimization &#183; Problem Solving</p>
+                </div>
+
+                <div class="skill-card reveal">
+                    <span class="skill-number">04</span>
+                    <h3>Professional</h3>
+                    <p>Research &#183; Technical Learning &#183; Project Building</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="certificates section" id="certificates">
+            <div class="section-label reveal">
+                <span>06</span>
+                CERTIFICATES
+            </div>
+
+            <div class="section-heading reveal">
+                <h2>Proof of <em>learning.</em></h2>
+                <span class="heading-index">06</span>
+            </div>
+
+            <div class="certificates-list">
+                {% for certification in certifications %}
+                    <div class="certificate-row reveal">
+                        <div class="certificate-number">
+                            {{ forloop.counter|stringformat:"02d" }}
+                        </div>
+
+                        <div class="certificate-name">
+                            <h3>{{ certification.name }}</h3>
+                            <span>
+                                {{ certification.certificates.count }}
+                                certificate{{ certification.certificates.count|pluralize }}
+                            </span>
+                        </div>
+
+                        <a href="{% url 'certification_view' certification.id %}" class="certificate-view">
+                            View certificates
+                            <span>&#8599;</span>
+                        </a>
+                    </div>
+                {% empty %}
+                    <div class="certificate-empty reveal">
+                        <p>Certificates will appear here as they are added.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+        <section class="contact section" id="contact">
+            <div class="contact-box reveal">
+                <div class="section-label">
+                    <span>07</span>
+                    CONTACT
+                </div>
+
+                <h2>
+                    Have an idea?
+                    <em>Let's talk.</em>
+                </h2>
+
+                <p>
+                    I'm interested in connecting with students, developers,
+                    researchers, and people building meaningful things.
+                </p>
+
+                {% if contact and contact.email %}
+                <a href="mailto:{{ contact.email }}" class="button button-primary">
+                    Start a conversation
+                    <span>&#8599;</span>
+                </a>
+                {% endif %}
+
+                <div class="contact-links" aria-label="Contact methods">
+                    {% if contact and contact.email %}
+                    <a href="mailto:{{ contact.email }}" class="contact-link" aria-label="Email">
+                        <span>EMAIL</span>
+                        <strong>{{ contact.email }}</strong>
+                    </a>
+                    {% endif %}
+
+                    {% if contact and contact.whatsapp_url %}
+                    <a href="{{ contact.whatsapp_url }}" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <span>WHATSAPP</span>
+                        <strong>{{ contact.whatsapp_url }}</strong>
+                    </a>
+                    {% endif %}
+
+                    {% if contact and contact.telegram_url %}
+                    <a href="{{ contact.telegram_url }}" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                        <span>TELEGRAM</span>
+                        <strong>{{ contact.telegram_url }}</strong>
+                    </a>
+                    {% endif %}
+
+                    {% if contact and contact.linkedin_url %}
+                    <a href="{{ contact.linkedin_url }}" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <span>LINKEDIN</span>
+                        <strong>LinkedIn</strong>
+                    </a>
+                    {% endif %}
+
+                    {% if contact and contact.github_url %}
+                    <a href="{{ contact.github_url }}" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <span>GITHUB</span>
+                        <strong>GitHub</strong>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div>
+            <strong>MUHAMMED ADGOLIGN</strong>
+            <span>Nuclear Engineering Student &#183; Developer &#183; Researcher</span>
+        </div>
+
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#research">Research</a>
+            <a href="#skills">Skills</a>
+              <a href="#certificates">Certificates</a>
+              <a href="#contact">Contact</a>
+        </div>
+
+&#169; 2026 MUHAMMED ADGOLIGN
+    </footer>
+
+</div>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
+
+
+
+
+
+
