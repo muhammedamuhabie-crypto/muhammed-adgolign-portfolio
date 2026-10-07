@@ -148,7 +148,11 @@
                     </div>
 
                     <div class="card-center">
-                        <span class="ma-large">MA</span>
+                        {% if profile and profile.image %}
+                            <img src="{{ profile.image.url }}" alt="{{ profile.name }}" class="profile-photo">
+                        {% else %}
+                            <span class="ma-large">MA</span>
+                        {% endif %}
                     </div>
 
                     <div class="card-bottom">

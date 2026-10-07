@@ -488,6 +488,16 @@ button {
     place-items: center;
 }
 
+.profile-photo {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    border: 1px solid var(--border);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
 .ma-large {
     color: var(--text);
     font-family: "Space Grotesk", sans-serif;
