@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
-from portfolio.views import home, certificate_view, certificate_file_view, certification_view
+from portfolio.views import home, robots_txt, certificate_view, certificate_file_view, certification_view
 from portfolio.sitemaps import PortfolioSitemap
 
 
@@ -13,6 +13,7 @@ sitemaps = {"portfolio": PortfolioSitemap()}
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django-sitemap"),
+    path("robots.txt", robots_txt, name="robots_txt"),
     path("", home, name="home"),
     path("certificate/<int:certificate_id>/", certificate_view, name="certificate_view"),
     path("certificate/<int:certificate_id>/file/", certificate_file_view, name="certificate_file_view"),

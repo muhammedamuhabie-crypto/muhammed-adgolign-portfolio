@@ -1,7 +1,16 @@
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
 from .models import Certification, Certificate, Project, Profile, Contact
+
+
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Sitemap: https://muhammed-adgolign-portfolio.onrender.com/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
 
 
 def home(request):
