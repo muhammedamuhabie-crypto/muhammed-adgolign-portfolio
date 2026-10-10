@@ -93,8 +93,8 @@ def send_contact_message(request):
             use_tls=options.get("use_tls", True),
             use_ssl=False,
             timeout=options.get("timeout", 10),
-            ssl_keyfile=None,
-            ssl_certfile=None,
+            ssl_keyfile="",
+            ssl_certfile="",
             fail_silently=False,
         )
 
