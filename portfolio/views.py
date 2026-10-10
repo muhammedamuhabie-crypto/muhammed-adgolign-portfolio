@@ -1,4 +1,13 @@
-from django.http import FileResponse, HttpResponse
+from django.http import FileResponse, HttpResponse, HttpResponseRedirect
+import logging
+
+from django.conf import settings
+from django.contrib import messages
+from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage
+from django.core.mail.backends.smtp import EmailBackend
+from django.core.validators import validate_email
+from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render
 
 from .models import Certification, Certificate, Project, Profile, Contact
@@ -30,6 +39,89 @@ def home(request):
         },
     )
 
+
+
+@require_POST
+def send_contact_message(request):
+    name = request.POST.get("name", "").strip()
+    sender_email = request.POST.get("email", "").strip()
+    subject = request.POST.get("subject", "").strip()
+    body = request.POST.get("message", "").strip()
+
+    if not name or not sender_email or not subject or not body:
+        messages.error(request, "Please complete all required fields.")
+        return HttpResponseRedirect("/#contact")
+
+    if (
+        len(name) > 100
+        or len(sender_email) > 254
+        or len(subject) > 150
+        or len(body) > 5000
+        or "\r" in subject
+        or "\n" in subject
+    ):
+        messages.error(request, "Please check your entries and try again.")
+        return HttpResponseRedirect("/#contact")
+
+    try:
+        validate_email(sender_email)
+    except ValidationError:
+        messages.error(request, "Please enter a valid email address.")
+        return HttpResponseRedirect("/#contact")
+
+    contact = Contact.objects.filter(active=True).first()
+
+    if not contact or not contact.email:
+        messages.error(
+            request,
+            "Contact email is not configured yet. Please try again later.",
+        )
+        return HttpResponseRedirect("/#contact")
+
+    try:
+        mailer = settings.MAILERS.get("default", {})
+        options = mailer.get("OPTIONS", {})
+
+        if not all(options.get(key) for key in ("host", "username", "password")):
+            raise RuntimeError("SMTP settings are incomplete.")
+
+        connection = EmailBackend(
+            host=options["host"],
+            port=options.get("port", 587),
+            username=options["username"],
+            password=options["password"],
+            use_tls=options.get("use_tls", True),
+            fail_silently=False,
+        )
+
+        email = EmailMessage(
+            subject=f"[Portfolio Contact] {subject}",
+            body=f"Name: {name}\nEmail: {sender_email}\n\nMessage:\n{body}",
+            from_email=options["username"],
+            to=[contact.email],
+            reply_to=[sender_email],
+            connection=connection,
+        )
+        sent_count = email.send(fail_silently=False)
+
+        if sent_count != 1:
+            raise RuntimeError("The email service did not accept the message.")
+
+        messages.success(
+            request,
+            "Your message was sent successfully. Thank you for reaching out!",
+        )
+
+    except Exception:
+        logging.getLogger(__name__).exception(
+            "Portfolio contact message could not be sent."
+        )
+        messages.error(
+            request,
+            "Sorry, your message could not be sent right now. Please try again later.",
+        )
+
+    return HttpResponseRedirect("/#contact")
 
 def certificate_view(request, certificate_id):
     certificate = get_object_or_404(
@@ -74,3 +166,7 @@ def certification_view(request, certification_id):
             "certification": certification,
         },
     )
+
+
+
+

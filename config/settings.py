@@ -132,11 +132,13 @@ STATIC_URL = 'static/'
 MAILERS = {
     'default': {
         'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
-        'HOST': os.environ.get('EMAIL_HOST', ''),
-        'PORT': int(os.environ.get('EMAIL_PORT', '587')),
-        'USERNAME': os.environ.get('EMAIL_HOST_USER', ''),
-        'PASSWORD': os.environ.get('EMAIL_HOST_PASSWORD', ''),
-        'USE_TLS': os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true',
+        'OPTIONS': {
+            'host': os.environ.get('EMAIL_HOST', ''),
+            'port': int(os.environ.get('EMAIL_PORT', '587')),
+            'username': os.environ.get('EMAIL_HOST_USER', ''),
+            'password': os.environ.get('EMAIL_HOST_PASSWORD', ''),
+            'use_tls': os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true',
+        },
     },
 }
 
@@ -165,10 +167,11 @@ CLOUDINARY_STORAGE = {
 
 STORAGES = {
     'default': {
-        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage',
+        'BACKEND': ('cloudinary_storage.storage.MediaCloudinaryStorage' if os.environ.get('CLOUDINARY_CLOUD_NAME') else 'django.core.files.storage.FileSystemStorage'),
     },
     'staticfiles': {
         'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
     },
 }
+
 

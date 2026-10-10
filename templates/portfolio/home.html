@@ -1,4 +1,4 @@
-{% load static %}
+﻿{% load static %}
 {% load portfolio_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -197,7 +197,7 @@
                         technical ideas can become practical solutions.
                     </p>
                     <p>
-                        I learn best by building, testing, and improving —
+                        I learn best by building, testing, and improving â€”
                         turning concepts from the classroom into projects
                         that help me understand how things work.
                     </p>
@@ -229,7 +229,7 @@
                     </p>
 
                     <p>
-                        I like turning what I learn into something tangible —
+                        I like turning what I learn into something tangible â€”
                         from software systems and engineering projects to
                         research ideas. My goal is to keep building practical
                         skills, asking better questions, and connecting
@@ -648,67 +648,206 @@
             </div>
         </section>
         <section class="contact section" id="contact">
-            <div class="contact-box reveal">
-                <div class="section-label">
-                    <span>07</span>
-                    CONTACT
-                </div>
+    <div class="contact-redesign reveal">
+
+        <div class="section-label">
+            <span>07</span>
+            CONTACT
+        </div>
+
+        <div class="contact-layout">
+
+            <div class="contact-details">
+                <p class="contact-eyebrow">GET IN TOUCH</p>
 
                 <h2>
-                    Have an idea?
-                    <em>Let's talk.</em>
+                    Let's start a
+                    <em>conversation.</em>
                 </h2>
 
-                <p>
-                    I'm interested in connecting with students, developers,
-                    researchers, and people building meaningful things.
+                <p class="contact-intro">
+                    Have a question, an idea, or an opportunity?
+                    I'd love to hear from you. Send me a message
+                    and I'll get back to you as soon as possible.
                 </p>
 
-                {% if contact and contact.email %}
-                <a href="mailto:{{ contact.email }}" class="button button-primary">
-                    Start a conversation
-                    <span>&#8599;</span>
-                </a>
-                {% endif %}
+                <div class="contact-methods">
 
-                <div class="contact-links" aria-label="Contact methods">
                     {% if contact and contact.email %}
-                    <a href="mailto:{{ contact.email }}" class="contact-link" aria-label="Email">
-                        <span>EMAIL</span>
-                        <strong>{{ contact.email }}</strong>
+                    <a href="mailto:{{ contact.email }}" class="contact-method">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="5" width="18" height="14" rx="2"/>
+                                <path d="m3 7 9 6 9-6"/>
+                            </svg>
+                        </span>
+                        <span class="contact-method-text">
+                            <span class="contact-method-label">EMAIL</span>
+                            <strong>{{ contact.email }}</strong>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true">↗</span>
                     </a>
                     {% endif %}
 
+                    {% if contact and contact.phone %}
+                    <a href="tel:{{ contact.phone }}" class="contact-method">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                                19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6
+                                19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3
+                                a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.8
+                                a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6
+                                l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.58
+                                2.8.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </span>
+                        <span class="contact-method-text">
+                            <span class="contact-method-label">PHONE</span>
+                            <strong>{{ contact.phone }}</strong>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true">↗</span>
+                    </a>
+                    {% endif %}
+
+                    {% if contact and contact.location %}
+                    <div class="contact-method">
+                        <span class="contact-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                        </span>
+                        <span class="contact-method-text">
+                            <span class="contact-method-label">LOCATION</span>
+                            <strong>{{ contact.location }}</strong>
+                        </span>
+                    </div>
+                    {% endif %}
+
                     {% if contact and contact.whatsapp_url %}
-                    <a href="{{ contact.whatsapp_url }}" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                        <span>WHATSAPP</span>
-                        <strong>{{ contact.whatsapp_url }}</strong>
+                    <a href="{{ contact.whatsapp_url }}" class="contact-method"
+                       target="_blank" rel="noopener noreferrer">
+                        <span class="contact-icon" aria-hidden="true">W</span>
+                        <span class="contact-method-text">
+                            <span class="contact-method-label">WHATSAPP</span>
+                            <strong>Message me on WhatsApp</strong>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true">↗</span>
                     </a>
                     {% endif %}
 
                     {% if contact and contact.telegram_url %}
-                    <a href="{{ contact.telegram_url }}" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-                        <span>TELEGRAM</span>
-                        <strong>{{ contact.telegram_url }}</strong>
+                    <a href="{{ contact.telegram_url }}" class="contact-method"
+                       target="_blank" rel="noopener noreferrer">
+                        <span class="contact-icon" aria-hidden="true">T</span>
+                        <span class="contact-method-text">
+                            <span class="contact-method-label">TELEGRAM</span>
+                            <strong>Connect on Telegram</strong>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true">↗</span>
                     </a>
                     {% endif %}
 
                     {% if contact and contact.linkedin_url %}
-                    <a href="{{ contact.linkedin_url }}" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <span>LINKEDIN</span>
-                        <strong>LinkedIn</strong>
+                    <a href="{{ contact.linkedin_url }}" class="contact-method"
+                       target="_blank" rel="noopener noreferrer">
+                        <span class="contact-icon" aria-hidden="true">in</span>
+                        <span class="contact-method-text">
+                            <span class="contact-method-label">LINKEDIN</span>
+                            <strong>Connect professionally</strong>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true">↗</span>
                     </a>
                     {% endif %}
 
                     {% if contact and contact.github_url %}
-                    <a href="{{ contact.github_url }}" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                        <span>GITHUB</span>
-                        <strong>GitHub</strong>
+                    <a href="{{ contact.github_url }}" class="contact-method"
+                       target="_blank" rel="noopener noreferrer">
+                        <span class="contact-icon" aria-hidden="true">GH</span>
+                        <span class="contact-method-text">
+                            <span class="contact-method-label">GITHUB</span>
+                            <strong>Explore my projects</strong>
+                        </span>
+                        <span class="contact-arrow" aria-hidden="true">↗</span>
                     </a>
                     {% endif %}
+
+                </div>
+
+                <div class="contact-availability">
+                    <span class="contact-status-dot"></span>
+                    Open to meaningful connections and opportunities
                 </div>
             </div>
-        </section>
+
+            <div class="contact-form-panel">
+                <div class="contact-form-heading">
+                    <span class="contact-form-number">01 / MESSAGE</span>
+                    <h3>Send Me a Message</h3>
+                    <p>Fill out the form below and I'll get back to you as soon as possible.</p>
+                </div>
+
+                {% if messages %}
+                <div class="contact-feedback" aria-live="polite">
+                    {% for message in messages %}
+                    <p class="contact-feedback-message {{ message.tags }}">
+                        {{ message }}
+                    </p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <form class="contact-form" action="/contact/send/" method="post">
+                    {% csrf_token %}
+
+                    <div class="contact-field">
+                        <label for="contact-name">Name <span>*</span></label>
+                        <input type="text" id="contact-name" name="name"
+                               placeholder="Your full name" autocomplete="name"
+                               maxlength="100" required>
+                    </div>
+
+                    <div class="contact-field">
+                        <label for="contact-email">Email <span>*</span></label>
+                        <input type="email" id="contact-email" name="email"
+                               placeholder="you@example.com" autocomplete="email"
+                               maxlength="254" required>
+                    </div>
+
+                    <div class="contact-field">
+                        <label for="contact-subject">Subject <span>*</span></label>
+                        <input type="text" id="contact-subject" name="subject"
+                               placeholder="What is your message about?"
+                               maxlength="150" required>
+                    </div>
+
+                    <div class="contact-field">
+                        <label for="contact-message">Message <span>*</span></label>
+                        <textarea id="contact-message" name="message" rows="5"
+                                  placeholder="Write your message here..."
+                                  maxlength="5000" required></textarea>
+                    </div>
+
+                    <button type="submit" class="contact-submit">
+                        <span>Send Message</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true">
+                            <path d="m22 2-7 20-4-9-9-4Z"/>
+                            <path d="M22 2 11 13"/>
+                        </svg>
+                    </button>
+
+                    <p class="contact-form-note"><span>*</span> Required fields</p>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
 
     </main>
 
@@ -737,6 +876,8 @@
 
 </body>
 </html>
+
+
 
 
 

@@ -1,4 +1,4 @@
-from django.db import models
+﻿from django.db import models
 
 
 class Certification(models.Model):
@@ -68,12 +68,20 @@ class Profile(models.Model):
         return self.name
 class Contact(models.Model):
     email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=30, blank=True)
+    location = models.CharField(max_length=200, blank=True)
+
     whatsapp_url = models.URLField(blank=True)
     telegram_url = models.URLField(blank=True)
     linkedin_url = models.URLField(blank=True)
     github_url = models.URLField(blank=True)
+
     active = models.BooleanField(default=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Contact Information"
+        verbose_name_plural = "Contact Information"
 
     def __str__(self):
         return self.email or "Contact Information"

@@ -1,4 +1,4 @@
-from django.contrib import admin
+﻿from django.contrib import admin
 
 from .models import Certification, Certificate, Project, Profile, Contact
 
@@ -91,15 +91,24 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ("email", "active", "updated_at")
+    list_display = ("email", "phone", "location", "active", "updated_at")
     list_filter = ("active",)
-    search_fields = ("email",)
+    search_fields = ("email", "phone", "location")
+    readonly_fields = ("updated_at",)
+
     fieldsets = (
         (
-            "Contact Information",
+            "01 — Contact Details",
             {
+                "description": "These details appear in the Contact section of your public portfolio.",
+                "fields": ("email", "phone", "location"),
+            },
+        ),
+        (
+            "02 — Social & Professional Links",
+            {
+                "description": "Add complete profile URLs. Leave any field blank if you do not want that contact method shown publicly.",
                 "fields": (
-                    "email",
                     "whatsapp_url",
                     "telegram_url",
                     "linkedin_url",
@@ -108,9 +117,10 @@ class ContactAdmin(admin.ModelAdmin):
             },
         ),
         (
-            "Display",
+            "03 — Display Settings",
             {
-                "fields": ("active",),
+                "description": "Only active contact information is intended to appear on the public portfolio.",
+                "fields": ("active", "updated_at"),
             },
         ),
     )
