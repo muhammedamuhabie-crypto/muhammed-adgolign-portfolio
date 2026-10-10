@@ -92,6 +92,7 @@ def send_contact_message(request):
             password=options["password"],
             use_tls=options.get("use_tls", True),
             use_ssl=False,
+            timeout=options.get("timeout", 10),
             fail_silently=False,
         )
 
