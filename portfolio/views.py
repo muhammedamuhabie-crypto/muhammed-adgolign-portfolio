@@ -1,4 +1,4 @@
-from django.http import FileResponse, HttpResponse, HttpResponseRedirect
+﻿from django.http import FileResponse, HttpResponse, HttpResponseRedirect
 import logging
 
 from django.conf import settings
@@ -91,6 +91,7 @@ def send_contact_message(request):
             username=options["username"],
             password=options["password"],
             use_tls=options.get("use_tls", True),
+            use_ssl=False,
             fail_silently=False,
         )
 
