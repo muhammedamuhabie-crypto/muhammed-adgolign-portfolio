@@ -1,11 +1,11 @@
-﻿from django.http import FileResponse, HttpResponse, HttpResponseRedirect
+from django.http import FileResponse, HttpResponse, HttpResponseRedirect
 import logging
+import os
 
-from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
-from django.core.mail import EmailMessage
-from django.core.mail.backends.smtp import EmailBackend
+import resend
+
 from django.core.validators import validate_email
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render
@@ -79,37 +79,27 @@ def send_contact_message(request):
         return HttpResponseRedirect("/#contact")
 
     try:
-        mailer = settings.MAILERS.get("default", {})
-        options = mailer.get("OPTIONS", {})
+        api_key = os.environ.get("RESEND_API_KEY")
+        if not api_key:
+            raise RuntimeError("RESEND_API_KEY is not configured.")
 
-        if not all(options.get(key) for key in ("host", "username", "password")):
-            raise RuntimeError("SMTP settings are incomplete.")
+        resend.api_key = api_key
 
-        connection = EmailBackend(
-            host=options["host"],
-            port=options.get("port", 587),
-            username=options["username"],
-            password=options["password"],
-            use_tls=options.get("use_tls", True),
-            use_ssl=False,
-            timeout=options.get("timeout", 10),
-            ssl_keyfile="",
-            ssl_certfile="",
-            fail_silently=False,
+        sender = os.environ.get(
+            "RESEND_FROM_EMAIL",
+            "Portfolio Contact <onboarding@resend.dev>",
         )
 
-        email = EmailMessage(
-            subject=f"[Portfolio Contact] {subject}",
-            body=f"Name: {name}\nEmail: {sender_email}\n\nMessage:\n{body}",
-            from_email=options["username"],
-            to=[contact.email],
-            reply_to=[sender_email],
-            connection=connection,
-        )
-        sent_count = email.send(fail_silently=False)
+        result = resend.Emails.send({
+            "from": sender,
+            "to": [contact.email],
+            "subject": f"[Portfolio Contact] {subject}",
+            "text": f"Name: {name}\nEmail: {sender_email}\n\nMessage:\n{body}",
+            "reply_to": [sender_email],
+        })
 
-        if sent_count != 1:
-            raise RuntimeError("The email service did not accept the message.")
+        if not getattr(result, "id", None):
+            raise RuntimeError("Resend did not return a message result.")
 
         messages.success(
             request,
