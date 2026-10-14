@@ -1,6 +1,6 @@
 ﻿from django.contrib import admin
 
-from .models import Certification, Certificate, Project, Profile, Contact
+from .models import Certification, Certificate, Project, Profile, Contact, NuclearShowcase
 
 
 class CertificateInline(admin.TabularInline):
@@ -121,6 +121,28 @@ class ContactAdmin(admin.ModelAdmin):
             {
                 "description": "Only active contact information is intended to appear on the public portfolio.",
                 "fields": ("active", "updated_at"),
+            },
+        ),
+    )
+
+@admin.register(NuclearShowcase)
+class NuclearShowcaseAdmin(admin.ModelAdmin):
+    list_display = ("title", "image", "updated_at")
+    search_fields = ("title", "description")
+    readonly_fields = ("updated_at",)
+
+    fieldsets = (
+        (
+            "Nuclear Showcase Content",
+            {
+                "description": "Manage the large nuclear-related image and the text displayed with it on the homepage.",
+                "fields": ("title", "description", "image"),
+            },
+        ),
+        (
+            "Record Information",
+            {
+                "fields": ("updated_at",),
             },
         ),
     )

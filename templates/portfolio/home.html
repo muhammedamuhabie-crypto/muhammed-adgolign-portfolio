@@ -67,7 +67,11 @@
 
     <header class="navbar">
         <a href="#home" class="brand">
+            {% if profile and profile.image %}
+            <img src="{{ profile.image.url }}" alt="MUHAMMED ADGOLIGN" class="brand-photo">
+        {% else %}
             <span class="brand-box">MA</span>
+        {% endif %}
             <span class="brand-text">
                 <strong>MUHAMMED</strong>
                 <small>ADGOLIGN</small>
@@ -142,35 +146,41 @@
                 <div class="orbit orbit-b"></div>
 
                 <div class="identity-card">
-                    <div class="card-top">
-                        <span>PORTFOLIO / 2026</span>
-                        <span>01</span>
-                    </div>
+    <div class="card-top">
+        <span>NUCLEAR ENGINEERING / 2026</span>
+        <span>01</span>
+    </div>
 
-                    <div class="card-center">
-                        {% if profile and profile.image %}
-                            <img src="{{ profile.image.url }}" alt="{{ profile.name }}" class="profile-photo">
-                        {% else %}
-                            <span class="ma-large">MA</span>
-                        {% endif %}
-                    </div>
-
-                    <div class="card-bottom">
-                        <div>
-                            <small>FOCUS</small>
-                            <strong>ENGINEERING / RESEARCH</strong>
-                        </div>
-                        <div>
-                            <small>STATUS</small>
-                            <strong>NUCLEAR ENGINEERING</strong>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="floating-tag tag-one">PYTHON</div>
-                <div class="floating-tag tag-two">RESEARCH</div>
-                <div class="floating-tag tag-three">BUILD</div>
+    <div class="card-center nuclear-showcase">
+        {% if nuclear_showcase and nuclear_showcase.image %}
+            <img
+                src="{{ nuclear_showcase.image.url }}"
+                alt="{{ nuclear_showcase.title }}"
+                class="nuclear-showcase-image"
+            >
+        {% else %}
+            <div class="nuclear-showcase-empty">
+                <span>NUCLEAR ENGINEERING</span>
+                <p>Add your nuclear image in Django Admin.</p>
             </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="nuclear-caption">
+    {% if nuclear_showcase %}
+        <h3>{{ nuclear_showcase.title }}</h3>
+        {% if nuclear_showcase.description %}
+            <p>{{ nuclear_showcase.description }}</p>
+        {% endif %}
+    {% else %}
+        <h3>Nuclear Engineering</h3>
+        <p>Exploring nuclear science, energy systems, and engineering research.</p>
+    {% endif %}
+</div>
+
+
+</div>
 
             <div class="scroll-indicator">
                 <span></span>
@@ -197,7 +207,7 @@
                         technical ideas can become practical solutions.
                     </p>
                     <p>
-                        I learn best by building, testing, and improving â€”
+                        I learn best by building, testing, and improving Ã¢â‚¬â€
                         turning concepts from the classroom into projects
                         that help me understand how things work.
                     </p>
@@ -229,7 +239,7 @@
                     </p>
 
                     <p>
-                        I like turning what I learn into something tangible â€”
+                        I like turning what I learn into something tangible Ã¢â‚¬â€
                         from software systems and engineering projects to
                         research ideas. My goal is to keep building practical
                         skills, asking better questions, and connecting
@@ -686,7 +696,7 @@
                             <span class="contact-method-label">EMAIL</span>
                             <strong>{{ contact.email }}</strong>
                         </span>
-                        <span class="contact-arrow" aria-hidden="true">↗</span>
+                        <span class="contact-arrow" aria-hidden="true">â†—</span>
                     </a>
                     {% endif %}
 
@@ -708,7 +718,7 @@
                             <span class="contact-method-label">PHONE</span>
                             <strong>{{ contact.phone }}</strong>
                         </span>
-                        <span class="contact-arrow" aria-hidden="true">↗</span>
+                        <span class="contact-arrow" aria-hidden="true">â†—</span>
                     </a>
                     {% endif %}
 
@@ -736,7 +746,7 @@
                             <span class="contact-method-label">WHATSAPP</span>
                             <strong>Message me on WhatsApp</strong>
                         </span>
-                        <span class="contact-arrow" aria-hidden="true">↗</span>
+                        <span class="contact-arrow" aria-hidden="true">â†—</span>
                     </a>
                     {% endif %}
 
@@ -748,7 +758,7 @@
                             <span class="contact-method-label">TELEGRAM</span>
                             <strong>Connect on Telegram</strong>
                         </span>
-                        <span class="contact-arrow" aria-hidden="true">↗</span>
+                        <span class="contact-arrow" aria-hidden="true">â†—</span>
                     </a>
                     {% endif %}
 
@@ -760,7 +770,7 @@
                             <span class="contact-method-label">LINKEDIN</span>
                             <strong>Connect professionally</strong>
                         </span>
-                        <span class="contact-arrow" aria-hidden="true">↗</span>
+                        <span class="contact-arrow" aria-hidden="true">â†—</span>
                     </a>
                     {% endif %}
 
@@ -772,7 +782,7 @@
                             <span class="contact-method-label">GITHUB</span>
                             <strong>Explore my projects</strong>
                         </span>
-                        <span class="contact-arrow" aria-hidden="true">↗</span>
+                        <span class="contact-arrow" aria-hidden="true">â†—</span>
                     </a>
                     {% endif %}
 
@@ -876,6 +886,10 @@
 
 </body>
 </html>
+
+
+
+
 
 
 

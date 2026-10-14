@@ -1,4 +1,4 @@
-from django.http import FileResponse, HttpResponse, HttpResponseRedirect
+﻿from django.http import FileResponse, HttpResponse, HttpResponseRedirect
 import logging
 import os
 
@@ -10,7 +10,7 @@ from django.core.validators import validate_email
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404, render
 
-from .models import Certification, Certificate, Project, Profile, Contact
+from .models import Certification, Certificate, Project, Profile, Contact, NuclearShowcase
 
 
 def robots_txt(request):
@@ -27,6 +27,7 @@ def home(request):
     projects = Project.objects.filter(published=True).order_by("order", "id")
     profile = Profile.objects.first()
     contact = Contact.objects.filter(active=True).first()
+    nuclear_showcase = NuclearShowcase.objects.first()
 
     return render(
         request,
@@ -36,6 +37,7 @@ def home(request):
             "projects": projects,
             "profile": profile,
             "contact": contact,
+            "nuclear_showcase": nuclear_showcase,
         },
     )
 
@@ -70,7 +72,6 @@ def send_contact_message(request):
         return HttpResponseRedirect("/#contact")
 
     contact = Contact.objects.filter(active=True).first()
-
     if not contact or not contact.email:
         messages.error(
             request,
@@ -160,6 +161,8 @@ def certification_view(request, certification_id):
             "certification": certification,
         },
     )
+
+
 
 
 

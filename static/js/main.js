@@ -66,24 +66,5 @@
     sections.forEach(section => {
         sectionObserver.observe(section);
     });
-
-    const identityCard = document.querySelector(".identity-card");
-
-    if (identityCard && window.matchMedia("(pointer:fine)").matches) {
-        identityCard.addEventListener("mousemove", event => {
-            const rect = identityCard.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            const rotateY = ((x / rect.width) - 0.5) * 8;
-            const rotateX = ((y / rect.height) - 0.5) * -8;
-
-            identityCard.style.transform =
-                `rotate(-4deg) perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        identityCard.addEventListener("mouseleave", () => {
-            identityCard.style.transform = "";
-        });
-    }
 });
+

@@ -85,3 +85,22 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email or "Contact Information"
+
+class NuclearShowcase(models.Model):
+    title = models.CharField(
+        max_length=200,
+        default="NUCLEAR ENGINEERING"
+    )
+    description = models.TextField(
+        blank=True,
+        default="Exploring nuclear science, energy systems, and engineering research."
+    )
+    image = models.ImageField(upload_to="nuclear/")
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Nuclear Image & Description"
+        verbose_name_plural = "Nuclear Image & Description"
+
+    def __str__(self):
+        return self.title
