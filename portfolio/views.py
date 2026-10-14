@@ -139,14 +139,28 @@ def certificate_file_view(request, certificate_id):
         id=certificate_id,
     )
 
-    response = FileResponse(
-        certificate.file.open("rb"),
-        content_type="application/pdf",
-    )
-    response["Content-Disposition"] = "inline"
-    response["X-Frame-Options"] = "SAMEORIGIN"
+    if not certificate.file:
+        return HttpResponse("Certificate file is unavailable.", status=404)
 
-    return response
+    try:
+        pdf_file = certificate.file.open("rb")
+        response = FileResponse(
+            pdf_file,
+            content_type="application/pdf",
+        )
+        response["Content-Disposition"] = "inline"
+        response["X-Frame-Options"] = "SAMEORIGIN"
+        return response
+    except Exception:
+        logging.exception(
+            "Failed to open certificate PDF. Certificate ID: %s; file: %s",
+            certificate_id,
+            certificate.file.name,
+        )
+        return HttpResponse(
+            "Unable to open this certificate PDF. The error has been logged.",
+            status=500,
+        )
 
 def certification_view(request, certification_id):
     certification = get_object_or_404(
